@@ -8,8 +8,19 @@
 </head>
 <body class="bg-gray-100 min-h-screen p-6">
   <div class="max-w-5xl mx-auto">
-    <h1 class="text-3xl font-bold mb-6 text-center">BERTopic Topics Viewer</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center">BERTopic Topics Viewer: Northmet Public Comments</h1>
+    <br>
+    <h2 class="text-xl font-bold mt-12 mb-4 text-center">Visualizations</h2>
+    <div class="flex flex-col items-center space-y-6">
+      <iframe src="bar_chart.html" class="w-[1020px] h-[775px]"></iframe>
+      <iframe src="hierarchy.html" class="w-[1020px] h-[1250px]"></iframe>
+      <iframe src="topics.html" class="w-[670px] h-[670px]"></iframe>
+      <img src="sentiment_distribution.png" alt="Sentiment Distribution" class="w-[900px] h-[600px] object-contain" />
+    </div>
+    <br>
+    <h2 class="text-xl font-bold mt-12 mb-4 text-center">Topic summarizations</h2>
     <div id="cardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <br>
   </div>
 
   <script>
