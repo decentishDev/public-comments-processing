@@ -48,11 +48,11 @@
 
           const card = document.createElement('div');
           card.className = 'bg-white p-5 rounded-2xl shadow-md';
-
           card.innerHTML = `
-            <h2 class="text-xl font-semibold mb-2">Topic ${topicNumber}</h2>
-            <p class="text-gray-600 mb-2"><strong>Frequency:</strong> ${frequency}</p>
-            <p class="text-gray-700 mb-2"><strong>Words:</strong> ${representationWords.map(word => `<span class="inline-block bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded mr-1">${word}</span>`).join('')}</p>
+            <p class="text-gray-600 mb-2">Topic ${topicNumber}</p>
+            <h2 class="text-xl font-semibold mb-2">Frequency: <strong>${frequency}</strong></h2>
+            <p>${representationWords.map(word => `<span class="inline-block bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded mr-1">${word}</span>`).join('')}</p>
+            <br>
             <p class="text-gray-800"><strong>Summary:</strong> ${summary}</p>
           `;
 
