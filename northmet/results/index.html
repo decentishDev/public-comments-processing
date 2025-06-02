@@ -18,45 +18,46 @@
       <img src="sentiment_distribution.png" alt="Sentiment Distribution" class="w-[900px] h-[600px] object-contain" />
     </div>
     <br>
-    <h2 class="text-xl font-bold mt-12 mb-4 text-center">Topic summarizations</h2>
+    <h2 class="text-xl font-bold mt-12 mb-4 text-center">Issue summarizations</h2>
     <div id="cardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     <br>
   </div>
 
   <script>
-    fetch('bertopic_summarized.csv')
+    fetch('issues_summarized.csv')
       .then(response => response.text())
       .then(csvText => {
-        const parsed = Papa.parse(csvText, { header: false });
-        const rows = parsed.data.slice(2);
-        const container = document.getElementById('cardsContainer');
+        Papa.parse(csvText, {
+          header: true,
+          skipEmptyLines: true,
+          complete: function(results) {
+            const container = document.getElementById('cardsContainer');
+            results.data.forEach(row => {
+              const card = document.createElement('div');
+              card.className = "bg-white shadow-md rounded-xl p-4";
 
-        rows.forEach(columns => {
-          if (columns.length < 6) return;
+              const headerRow = document.createElement('div');
+              headerRow.className = "flex justify-between items-center text-lg mb-2";
 
-          const topicNumber = columns[0]?.trim();
-          const frequency = columns[1]?.trim();
-          const representationRaw = columns[3]?.trim();
-          const summary = columns[5]?.trim();
+              const issueId = document.createElement('div');
+              issueId.textContent = `${row.Issue}`;
+              issueId.className = "text-gray-600 font-bold";
 
-          let representationWords;
-          try {
-            representationWords = JSON.parse(representationRaw.replace(/'/g, '"'));
-          } catch {
-            representationWords = ['(Parsing error)'];
+              const count = document.createElement('div');
+              count.textContent = `Count: ${row.Count}`;
+              count.className = "text-black";
+
+              const summary = document.createElement('div');
+              summary.textContent = row.Summary;
+              summary.className = "mt-2 text-gray-700";
+
+              headerRow.appendChild(issueId);
+              headerRow.appendChild(count);
+              card.appendChild(headerRow);
+              card.appendChild(summary);
+              container.appendChild(card);
+            });
           }
-
-          const card = document.createElement('div');
-          card.className = 'bg-white p-5 rounded-2xl shadow-md';
-          card.innerHTML = `
-            <p class="text-gray-600 mb-2">Topic ${topicNumber}</p>
-            <h2 class="text-xl font-semibold mb-2">Frequency: <strong>${frequency}</strong></h2>
-            <p>${representationWords.map(word => `<span class="inline-block bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded mr-1">${word}</span>`).join('')}</p>
-            <br>
-            <p class="text-gray-800"><strong>Summary:</strong> ${summary}</p>
-          `;
-
-          container.appendChild(card);
         });
       });
   </script>
