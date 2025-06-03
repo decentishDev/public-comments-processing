@@ -19,12 +19,12 @@
     </div>
     <br>
     <h2 class="text-xl font-bold mt-12 mb-4 text-center">Issue summarizations</h2>
-    <div id="cardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="cardsContainer" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6"></div>
     <br>
   </div>
 
   <script>
-    fetch('issues_summarized.csv')
+    fetch('issues_summarized1.csv')
       .then(response => response.text())
       .then(csvText => {
         Papa.parse(csvText, {
